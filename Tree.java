@@ -191,6 +191,48 @@ public class Tree {
         }
     
     }
+
+    public No deleteNo(No atual , int valor) {
+        if(atual == null) {
+            return atual;
+        }
+
+        else if(valor < atual.getValor()){
+            atual.setEsq(deleteNo(atual.getEsq(), valor));
+        }
+    
+        else if(valor > atual.getValor()){
+            atual.setDir(deleteNo(atual.getDir(), valor));
+        }
+
+        else {
+            if(atual.getEsq() == null && atual.getDir() == null) {
+                atual = null;
+            }
+
+            else if(atual.getEsq() == null) {
+                No temp = atual;
+                atual = atual.getDir();
+                temp = null;
+            }
+
+            else if(atual.getDir() == null) {
+                No temp = atual;
+                atual = atual.getEsq();
+                temp = null;
+            }
+
+            else {
+                No temp = NoMin(atual.getDir());
+                atual.setValor(temp.getValor());
+                atual.setDir(deleteNo(atual.getDir(), temp.getValor()));
+            }
+        }
+    
+        return atual;
+    }
+
+
 }
 
     // identificar o nível de nó

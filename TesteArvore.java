@@ -53,8 +53,16 @@ public class TesteArvore {
             int nivel = t.nivelNo(t.getRoot() , 10 , 0);
             System.out.println("Nivel = " + nivel);
         
-            int altura = t.alturaNo(t.getRoot() , 5);
+            int altura = t.alturaNo(t.getRoot() , 8);
             System.out.println("Altura = " + altura);
+
+            No deletado = t.deleteNo(t.getRoot() , 9);
+            System.out.println("No deletado : " + deletado.getValor());
+            
+            System.out.print("Em Ordem = "); 
+            t.inOrder(t.getRoot());
+            System.out.println("\n");
+            
         
         }
 }
