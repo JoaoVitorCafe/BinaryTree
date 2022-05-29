@@ -84,23 +84,26 @@ public class Tree {
     }
 
     public No NoMax(No atual) {
-    // Caso a árvore não esteja em regra binária basta colocar pra ele percorrer à esquerda tbm.
-
-        if(atual != null) {
-            No maximo = atual;
-            No dir =  NoMax(atual.getDir());
-            
-            if(dir.getValor() > maximo.getValor())
-                maximo = dir;
-                return maximo;
-            }
-
-        return new No(Integer.MIN_VALUE);
-    }
+        // Caso a árvore não esteja em regra binária basta colocar pra ele percorrer à esquerda tbm.
+    
+        // Vai apenas pra direita pressupondo que a árvore esteja seguindo a regra binária.
+            if(atual != null) {
+                No maximo = atual;
+                No dir = NoMax(atual.getDir());
+                
+    
+                if(dir.getValor() > maximo.getValor())
+                    maximo = dir;
+                    return maximo;
+                }
+    
+            return new No(Integer.MIN_VALUE);
+        }
 
     public No NoMin(No atual) {
         // Caso a árvore não esteja em regra binária basta colocar pra ele percorrer à direita tbm.
         
+        // Vai apenas pra direita pressupondo que a árvore esteja seguindo a regra binária.
         if(atual != null) {
             No minimo = atual;
             No esq = NoMin(atual.getEsq());
@@ -118,6 +121,7 @@ public class Tree {
             return 0;
         }
 
+        // Pecorre todas á esquerda e direita somando os nós que encontra
         return 1 + totalNos(atual.getEsq()) + totalNos(atual.getDir());
     }
 
@@ -126,6 +130,7 @@ public class Tree {
             return 0;
         }
         
+        // Se não tiver folhas retorna 1 que seŕa somado com o resultado do nó do lado oposto
         if(atual.getEsq() == null && atual.getDir() == null) {
             return 1;
         } 
@@ -137,9 +142,11 @@ public class Tree {
         
         if(atual != null)
         {
+            // Se não tiver filhos printa o valor do nó
             if(atual.getEsq() == null && atual.getDir() == null) {
                 System.out.print(atual.getValor() + " ");
             } else {
+                // Procura na direita e esquerda
                 identificarFolhas(atual.getEsq());
                 identificarFolhas(atual.getDir());
             } 
@@ -155,13 +162,15 @@ public class Tree {
         if(atual.getValor() == target){
             return nivel;
         }
-
+        
+        // Procura primeiramente na direita o alvo e aumenta em 1 o nível 
         int n = nivelNo(atual.getEsq() , target , nivel +1);
 
         if(n != -1){
             return n;
         }
 
+        // Caso não obtenha resultado na esquerda procura na direita , aumentando em 1 o nível
         return nivelNo(atual.getDir() , target , nivel +1);
     }
 
@@ -171,9 +180,13 @@ public class Tree {
             return -1;
         }
 
+        // calcula altura da sub arvore da esquerda
         int alturaEsq = altura(atual.getEsq());
+        
+        /// calcula altura da sub arvore da direita
         int alturaDir = altura(atual.getDir());
 
+        // compara as duas com o propósito de pegar o maior e soma 1 de altura;
         if(alturaEsq > alturaDir) {
             return 1 + alturaEsq;
         } else {
@@ -183,10 +196,12 @@ public class Tree {
     }
 
     public int alturaNo(No atual , int valor) {
+        // Procura o no para achar altura
         No target = search(atual , valor);
         if(target == null){
             return -1;
         } else {
+            //calcula altura do nó
             return altura(target);
         }
     
@@ -197,32 +212,39 @@ public class Tree {
             return atual;
         }
 
+        // Se o valor do nó for menor que o do root vai pra esquerda
         else if(valor < atual.getValor()){
             atual.setEsq(deleteNo(atual.getEsq(), valor));
         }
     
+        // Se o valor do nó for maior que o do root vai pra direita
         else if(valor > atual.getValor()){
             atual.setDir(deleteNo(atual.getDir(), valor));
         }
 
         else {
+            // Se não tem filhos deleta por completo
             if(atual.getEsq() == null && atual.getDir() == null) {
                 atual = null;
             }
 
+            
             else if(atual.getEsq() == null) {
+            // Se a esquerda estiver vazia "sobe" o nó direito , cortando o de baixo
                 No temp = atual;
                 atual = atual.getDir();
                 temp = null;
             }
 
             else if(atual.getDir() == null) {
+                // Se a direita estiver vazia "sobe" o nó esquerdo , cortando o de baixo
                 No temp = atual;
                 atual = atual.getEsq();
                 temp = null;
             }
             
             else {
+                // Caso tenha dois filhos pega o minimo na sub arvore da direita , "sobe" o minimo e deleta o de baixo(duplicado) 
                 No temp = NoMin(atual.getDir());
                 atual.setValor(temp.getValor());
                 atual.setDir(deleteNo(atual.getDir(), temp.getValor()));
@@ -232,9 +254,5 @@ public class Tree {
         return atual;
     }
 
-
 }
 
-    // identificar o nível de nó
-    // Altura de um nó    
-    // remover um nó

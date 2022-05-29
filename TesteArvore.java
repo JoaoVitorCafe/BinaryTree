@@ -35,16 +35,17 @@ public class TesteArvore {
             }
 
             No max = t.NoMax(t.getRoot());
-            System.out.println("Max = " + max.getValor());
+            System.out.println("\nNó Maximo = " + max.getValor());
 
             No min = t.NoMin(t.getRoot());
-            System.out.println("Min = " + min.getValor());
+            System.out.println("\nNó Minímo = " + min.getValor());
 
             int totalNos = t.totalNos(t.getRoot());
-            System.out.println("Total de nós = " + totalNos);
+            System.out.println("\nTotal de nós = " + totalNos);
+
 
             int totalFolhas = t.totalFolhas(t.getRoot());
-            System.out.println("Total de folhas = " + totalFolhas);
+            System.out.println("\nTotal de folhas = " + totalFolhas);
 
             System.out.print("Folhas = ");
             t.identificarFolhas(t.getRoot());
@@ -57,9 +58,8 @@ public class TesteArvore {
             System.out.println("Altura = " + altura);
 
             t.deleteNo(t.getRoot() , 1);
-         
             
-            System.out.print("Em Ordem = "); 
+            System.out.print("Em Ordem depois de remover = "); 
             t.inOrder(t.getRoot());
             System.out.println("\n");
             
