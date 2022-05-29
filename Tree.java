@@ -221,7 +221,7 @@ public class Tree {
                 atual = atual.getEsq();
                 temp = null;
             }
-
+            
             else {
                 No temp = NoMin(atual.getDir());
                 atual.setValor(temp.getValor());
