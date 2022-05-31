@@ -91,12 +91,12 @@ public class Tree {
                 No maximo = atual;
                 No dir = NoMax(atual.getDir());
                 
-    
                 if(dir.getValor() > maximo.getValor())
                     maximo = dir;
                     return maximo;
                 }
-    
+            
+            // Precisava retornar um nó com valor mínimo para fazer a comparação quando a recursividade chegasse no nó mais distante.
             return new No(Integer.MIN_VALUE);
         }
 
@@ -114,6 +114,8 @@ public class Tree {
             }
 
         return new No(Integer.MAX_VALUE);
+        // Precisava retornar um nó com valor máximo para fazer a comparação quando a recursividade chegasse no nó mais distante.
+
     }
 
     public int totalNos(No atual) {
